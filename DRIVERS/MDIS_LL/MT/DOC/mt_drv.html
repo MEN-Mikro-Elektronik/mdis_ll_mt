@@ -1,0 +1,617 @@
+<html>
+<head>
+<title>MT driver</title>
+<style type=text/css>
+    Body { background-color: #ffffff; }
+    A:link { color: #c50038; }
+    A:hover { color: #28669b; }
+    P, H1, H2, H3, H3, H5, LI {
+        color: #434343;
+        font-family: Arial, Helvetica, Univers;
+    }
+    P, LI { font-size: 9.000000pt; }
+</style>
+</head>
+<body>
+<h1>MT driver</h1>
+<p>Wed Oct 14 14:13:23 WEDT 2009</p>
+<h2>Overview of all Functions</h2>
+<a name="chapt0"><a href="#intro0"><h3>Low level driver for MDIS test purposes</h3></a>
+<TABLE border=1>
+<TR><TD><P><B>Function</B></P></TD><TD><P><B>Description</B></P></TD></TR>
+
+<TR><TD><P><a href="#MT_GetEntryX">MT_GetEntryX</a></P></TD><TD><P>Initialize drivers jump table </P></TD></TR>
+<TR><TD><P><a href="#MT_Init">MT_Init</a></P></TD><TD><P>Allocate and return ll handle, initialize hardware </P></TD></TR>
+<TR><TD><P><a href="#MT_Exit">MT_Exit</a></P></TD><TD><P>De-initialize hardware and cleanup memory </P></TD></TR>
+<TR><TD><P><a href="#MT_Read">MT_Read</a></P></TD><TD><P>Reads value from device </P></TD></TR>
+<TR><TD><P><a href="#MT_Write">MT_Write</a></P></TD><TD><P>Write value to device </P></TD></TR>
+<TR><TD><P><a href="#MT_SetStat">MT_SetStat</a></P></TD><TD><P>Set driver status </P></TD></TR>
+<TR><TD><P><a href="#MT_GetStat">MT_GetStat</a></P></TD><TD><P>Get driver status </P></TD></TR>
+<TR><TD><P><a href="#MT_BlockRead">MT_BlockRead</a></P></TD><TD><P>Read data block from device </P></TD></TR>
+<TR><TD><P><a href="#MT_BlockWrite">MT_BlockWrite</a></P></TD><TD><P>Write data block to device </P></TD></TR>
+<TR><TD><P><a href="#MT_Irq">MT_Irq</a></P></TD><TD><P>Interrupt service routine (not used) LL_IRQ_UNKNOWN </P></TD></TR>
+<TR><TD><P><a href="#MT_Info">MT_Info</a></P></TD><TD><P>Get driver info </P></TD></TR>
+<TR><TD><P><a href="#Ident">Ident</a></P></TD><TD><P>Return ident string </P></TD></TR>
+<TR><TD><P><a href="#Cleanup">Cleanup</a></P></TD><TD><P>Close all handles, free memory and return error code </P></TD></TR>
+<TR><TD><P><a href="#DoSleep">DoSleep</a></P></TD><TD><P>Release devSem, sleep specified time and lock devSem </P></TD></TR>
+<TR><TD><P><a href="#AlarmHandler0">AlarmHandler0</a></P></TD><TD><P>Handler for alarm 0 </P></TD></TR>
+<TR><TD><P><a href="#AlarmHandler1">AlarmHandler1</a></P></TD><TD><P>Handler for alarm 1 </P></TD></TR>
+<TR><TD><P><a href="#CallbackHandler0">CallbackHandler0</a></P></TD><TD><P>Handler for callback 0 (alarm) </P></TD></TR>
+<TR><TD><P><a href="#CallbackHandler1">CallbackHandler1</a></P></TD><TD><P>Handler for callback 1 (alarm) </P></TD></TR>
+<TR><TD><P><a href="#SharedMemHandler0">SharedMemHandler0</a></P></TD><TD><P>Handler for shared memory 0 access (alarm) </P></TD></TR>
+<TR><TD><P><a href="#SharedMemHandler1">SharedMemHandler1</a></P></TD><TD><P>Handler for shared memory access 1 (alarm) </P></TD></TR>
+</TABLE>
+ 
+<a name="intro0"><h1>Low level driver for MDIS test purposes </h1></a>
+<pre>
+This driver allows to test MDIS functionality.
+
+It makes no hardware access if NO_HWACCESS is specified
+or as long triggering is disabled.
+Signals, callbacks and shared memory access are software
+triggered using alarms.
+
+Following features are configurable via compiler switch:
+- simulate process lock modes 0..3 (LOCKMODE):
+  0 = unknown          return ERR_LL_ILL_PARAM
+  1 = no locking       return 1
+  2 = call locking     return 2
+  3 = channel locking  return 3
+
+Following features are configurable via descriptor entry:
+- simulate init error (wrong ID)
+- make trigger access at alarms+callbacks
+
+Following features are configurable via status calls:
+- do nothing (empty call)
+- simulate read/write errors
+- let process sleep within a read/write/getstat/setstat call
+- produce cyclic/single signals   (2 differnt signals)
+- produce cyclic/single callbacks (2 differnt callbacks)
+- produce cyclic/single shared memory access (2 differnt areas)
+
+Following i/o can be done:
+- read: read a previously written value from i/o buffer
+- write: write value into i/o buffer
+- block read: read a previously written block from block buffer
+- block write: write block into block buffer
+
+NOTE: Maximum alarm rate depends on the systems ticker
+      resolution (as returned via M_MK_TICKRATE getstat)
+
+If MT_PCI switch is set, sets up 3 addresspaces (one with PCICFG)
+to test MK's PCI functionality. Only the open call makes sense
+
+Shared memory functionality will only be used if the switch
+NO_SHARED_MEM is not set.
+
+Callback functionality will only be used if the switch
+NO_CALLBACK is not set.
+
+Required: ---
+Switches: _ONE_NAMESPACE_PER_DRIVER_
+          LOCKMODE       : lock mode processing (LL_INFO_LOCKMODE)
+          MT_PCI         : see above. LOCKMODE must be set to 0
+          NO_SHARED_MEM  : shared memory not supported
+          NO_CALLBACK    : callback not supported
+          NO_HWACCESS    : makes never a HW access and requests no address space
+
+</pre>
+<a name="MT_GetEntryX"><h2>Function MT_GetEntryX()</h2></a>
+
+<h3>Syntax</h3>
+<pre>void
+#ifdef _ONE_NAMESPACE_PER_DRIVER_
+    LL_GetEntry
+#else
+#  if ( LOCKMODE == 0 )
+#   ifdef MT_PCI
+    MT_GetEntry_Pci
+#   else
+    MT_GetEntry_LockMode0
+#   endif
+#  endif
+#  if ( LOCKMODE == 1 )
+    MT_GetEntry_LockMode1
+#  endif
+#  if ( LOCKMODE == 2 )
+    MT_GetEntry_LockMode2
+#  endif
+#  if ( LOCKMODE == 3 )
+    MT_GetEntry_LockMode3
+#  endif
+#endif
+    ( LL_ENTRY* drvP )
+</pre><h3>Description</h3>
+<pre>Initialize drivers jump table
+
+MT_GetEntry0..3  which means
+             0 = unknown
+             1 = no locking
+             2 = call locking
+             3 = channel locking
+
+</pre><h3>Input</h3>
+<pre>---
+</pre><h3>Output</h3>
+<pre>drvP  pointer to the initialized jump table structure
+</pre>
+<a name="MT_Init"><h2>Function MT_Init()</h2></a>
+
+<h3>Syntax</h3>
+<pre>int32 MT_Init(
+    DESC_SPEC       *descP,
+    OSS_HANDLE      *osHdl,
+    MACCESS         *ma,
+    OSS_SEM_HANDLE  *devSemHdl,
+    OSS_IRQ_HANDLE  *irqHdl,
+    LL_HANDLE       **llHdlP
+)
+</pre><h3>Description</h3>
+<pre>Allocate and return ll handle, initialize hardware
+
+The following descriptor keys are used:
+
+Deskriptor key        Default          Range
+--------------------  ---------------  -------------
+DEBUG_LEVEL           OSS_DBG_DEFAULT  see dbg.h
+DEBUG_LEVEL_DESC      DBG_OFF          see dbg.h
+ID_CHECK              0                0..1
+
+</pre><h3>Input</h3>
+<pre>descSpec   pointer to descriptor data
+osHdl      oss handle
+maHdl      hw access handle
+devSemHdl  device semaphore handle
+irqHdl     irq handle
+</pre><h3>Output</h3>
+<pre>llHdlP     ptr to low level driver handle
+return     success (0) or error code
+</pre>
+<a name="MT_Exit"><h2>Function MT_Exit()</h2></a>
+
+<h3>Syntax</h3>
+<pre>int32 MT_Exit(
+   LL_HANDLE    **llHdlP
+)
+</pre><h3>Description</h3>
+<pre>De-initialize hardware and cleanup memory
+
+</pre><h3>Input</h3>
+<pre>llHdlP    ptr to low level driver handle
+</pre><h3>Output</h3>
+<pre>return    success (0) or error code
+</pre>
+<a name="MT_Read"><h2>Function MT_Read()</h2></a>
+
+<h3>Syntax</h3>
+<pre>int32 MT_Read(
+    LL_HANDLE *llHdl,
+    int32 ch,
+    int32 *value
+)
+</pre><h3>Description</h3>
+<pre>Reads value from device
+
+</pre><h3>Input</h3>
+<pre>llHdl    ll handle
+ch       current channel
+</pre><h3>Output</h3>
+<pre>valueP   read value
+return   success (0) or error code
+</pre>
+<a name="MT_Write"><h2>Function MT_Write()</h2></a>
+
+<h3>Syntax</h3>
+<pre>int32 MT_Write(
+    LL_HANDLE *llHdl,
+    int32 ch,
+    int32 value
+)
+</pre><h3>Description</h3>
+<pre>Write value to device
+
+</pre><h3>Input</h3>
+<pre>llHdl    ll handle
+ch       current channel
+value    value to write
+</pre><h3>Output</h3>
+<pre>return   success (0) or error code
+</pre>
+<a name="MT_SetStat"><h2>Function MT_SetStat()</h2></a>
+
+<h3>Syntax</h3>
+<pre>int32 MT_SetStat(
+    LL_HANDLE   *llHdl,
+    int32       code,
+    int32       ch,
+    INT32_OR_64 value32_or_64
+)
+</pre><h3>Description</h3>
+<pre>Set driver status
+
+Following status codes are supported:
+
+Code                 Description                Values
+-------------------  -------------------------  ----------
+M_LL_DEBUG_LEVEL     driver debug level         see oss.h
+M_MK_IRQ_ENABLE      interrupt enable           0..1
+M_LL_IRQ_COUNT       interrupt counter          0..max
+M_LL_BLK_CALLBACK    callback interface         -
+M_LL_BLK_SHMEM_x     shared memory interface    -
+-------------------  -------------------------  ----------
+MT_NOACTION          do nothing                 0..max
+MT_BUSYLOOP          perform busy loop          0..max
+MT_MDELAY            test micro delay           0..max
+MT_xxx_ERROR         produce call errors        0..1
+MT_xxx_SLEEP         let calls sleep [msec]     0..max
+MT_ONE_SLEEP         one-shot call sleep mode   0..1
+MT_BLK_ALARM_SET     activate    alarm i        see below
+MT_ALARM_CLR         de-activate alarm i        0..1
+MT_BLK_CALLBACK_SET  activate    callback i     see below
+MT_CALLBACK_CLR      de-activate callback i     0..1
+MT_BLK_SHMEM_SET     activate    shared mem i   see below
+MT_SHMEM_CLR         de-activate shared mem i   0..1
+MT_SEM_BIN_TAK       take binary semaphore      0..max
+MT_SEM_BIN_REL       release binary semaphore   -
+MT_SEM_CNT_TAK       take counter semaphore     0..max
+MT_SEM_CNT_REL       release counter semaphore  -
+-------------------  -------------------------  ----------
+
+MT_NOACTION does really nothing and returns with success.
+
+MT_BUSYLOOP performs &#60;value&#62; busy loop to test process
+timeslicing/locking
+
+MT_MDELAY calls OSS_MikroDelay with the specified value (us)
+
+MT_xxx_ERROR enables call errors. For all subsequent calls
+of the corresponding function, an error is returned:
+
+   MT_READ_ERROR       produce read errors
+   MT_WRITE_ERROR      produce write errors
+
+MT_xxx_SLEEP enables call sleeping. For all subsequent calls
+of the corresponding function, function waits in sleep state
+for specified millisecons before it returns. To disable call
+sleeping define sleep time=0.
+
+   MT_READ_SLEEP       read sleep [msec]
+   MT_WRITE_SLEEP      write sleep [msec]
+   MT_BLOCKREAD_SLEEP  blockread sleep [msec]
+   MT_BLOCKWRITE_SLEEP blockwrite sleep [msec]
+   MT_GETSTAT_SLEEP    getstat sleep [msec] *)
+   MT_SETSTAT_SLEEP    setstat sleep [msec] *)
+
+   *) sleeps only at MT_NOACTION code
+
+If MT_ONE_SLEEP is enabled (1), sleep mode is automatically
+cleared after once waited (one-shot mode).
+
+MT_BLK_ALARM_SET enables generation of alarm/signals.
+Cyclic or single alarms with specified period are produced
+and the specified signal is send to the application:
+
+   typedef struct {
+      u_int32 nr;      alarm index (0 or 1)
+      u_int32 msec;    alarm time [msec]
+      u_int32 cyclic;  cyclic alarm (0=single, 1=cyclic)
+      u_int32 signal;  signal to send (0=none)
+   } MT_BLK_ALARM;
+
+MT_ALARM_CLR disables generation of specified alarm,
+where alarm index is passed as value.
+
+MT_BLK_CALLBACK is passed unmodified to OSS_CallbackSetStat
+
+MT_BLK_SHMEM_SET enables shared memory access.
+Shared memory access can be triggered cyclic or single
+with specified period:
+
+   typedef struct {
+      u_int32 nr;      shared memory area index (0..1)
+      u_int32 msec;    access period [msec]
+      u_int32 cyclic;  cyclic mode (0=single, 1=cyclic)
+   } MT_BLK_SHMEM;
+
+MT_SHMEM_CLR disables access of specified shared memory,
+where area index is passed as value.
+
+MT_SEM_BIN_TAK takes the binary semaphore with timeout
+MT_SEM_BIN_REL releases the token binary semaphore
+MT_SEM_CNT_TAK takes the counter semaphore with timeout
+MT_SEM_CNT_REL relaeses the token counter semaphore
+
+</pre><h3>Input</h3>
+<pre>llHdl      ll handle
+code       status code
+ch         current channel
+value32_or64  data or ptr to block
+          data struct (M_SG_BLOCK)  (*)
+(*) = for block status codes
+</pre><h3>Output</h3>
+<pre>return     success (0) or error code
+</pre>
+<a name="MT_GetStat"><h2>Function MT_GetStat()</h2></a>
+
+<h3>Syntax</h3>
+<pre>int32 MT_GetStat(
+    LL_HANDLE   *llHdl,
+    int32       code,
+    int32       ch,
+    INT32_OR_64 *value32_or_64P
+)
+</pre><h3>Description</h3>
+<pre>Get driver status
+
+Following status codes are supported:
+
+Code                 Description                Values
+-------------------  -------------------------  ----------
+M_LL_DEBUG_LEVEL     driver debug level         see oss.h
+M_LL_CH_NUMBER       number of channels         32
+M_LL_CH_DIR          direction of curr chan     M_CH_INOUT
+M_LL_CH_LEN          length of curr chan [bits] 1..max
+M_LL_CH_TYP          description of curr chan   M_CH_BINARY
+M_LL_IRQ_COUNT       interrupt counter          0..max
+M_LL_ID_CHECK        eeprom is checked          0..1
+M_LL_ID_SIZE         eeprom size [bytes]        128
+M_MK_BLK_REV_ID      ident function table ptr   -
+M_LL_BLK_CALLBACK_x  callback interface         -
+-------------------  -------------------------  ----------
+MT_NOACTION          do nothing                 0..max
+MT_xxx_ERROR         produce call errors        0..1
+MT_xxx_SLEEP         let calls sleep [msec]     0..max
+MT_ONE_SLEEP         one-shot call sleep mode   0..1
+-------------------  -------------------------  ----------
+
+MT_xxx_ERROR returns if corresponding call errors are
+enabled:
+
+   MT_READ_ERROR       read errors
+   MT_WRITE_ERROR      write errors
+
+MT_xxx_SLEEP returns if corresponding sleep modes are
+enabled, i.e. the specified sleep time (0=disabled):
+
+   MT_READ_SLEEP       read sleep [msec]
+   MT_WRITE_SLEEP      write sleep [msec]
+   MT_BLOCKREAD_SLEEP  blockread sleep [msec]
+   MT_BLOCKWRITE_SLEEP blockwrite sleep [msec]
+   MT_GETSTAT_SLEEP    getstat sleep [msec]
+   MT_SETSTAT_SLEEP    setstat sleep [msec]
+
+</pre><h3>Input</h3>
+<pre>llHdl      ll handle
+code       status code
+ch         current channel
+value32_or64P  ptr to block data struct (M_SG_BLOCK)  (*)
+(*) = for block status codes
+</pre><h3>Output</h3>
+<pre>valueP     data ptr or
+           ptr to block data struct (M_SG_BLOCK)  (*)
+return     success (0) or error code
+(*) = for block status codes
+</pre>
+<a name="MT_BlockRead"><h2>Function MT_BlockRead()</h2></a>
+
+<h3>Syntax</h3>
+<pre>int32 MT_BlockRead(
+     LL_HANDLE *llHdl,
+     int32     ch,
+     void      *buf,
+     int32     size,
+     int32     *nbrRdBytesP
+)
+</pre><h3>Description</h3>
+<pre>Read data block from device
+Fills the buffer with linear pattern
+
+</pre><h3>Input</h3>
+<pre>llHdl        ll handle
+ch           current channel
+buf          data buffer
+size         data buffer size
+</pre><h3>Output</h3>
+<pre>nbrRdBytesP  number of read bytes
+return       success (0) or error code
+</pre>
+<a name="MT_BlockWrite"><h2>Function MT_BlockWrite()</h2></a>
+
+<h3>Syntax</h3>
+<pre>int32 MT_BlockWrite(
+     LL_HANDLE *llHdl,
+     int32     ch,
+     void      *buf,
+     int32     size,
+     int32     *nbrWrBytesP
+)
+</pre><h3>Description</h3>
+<pre>Write data block to device
+Dump data and return size bytes
+
+</pre><h3>Input</h3>
+<pre>llHdl        ll handle
+ch           current channel
+buf          data buffer
+size         data buffer size
+</pre><h3>Output</h3>
+<pre>nbrWrBytesP  number of written bytes
+return       success (0) or error code
+</pre>
+<a name="MT_Irq"><h2>Function MT_Irq()</h2></a>
+
+<h3>Syntax</h3>
+<pre>int32 MT_Irq(
+   LL_HANDLE *llHdl
+)
+</pre><h3>Description</h3>
+<pre>Interrupt service routine (not used) LL_IRQ_UNKNOWN
+
+</pre><h3>Input</h3>
+<pre>llHdl    ll handle
+</pre><h3>Output</h3>
+<pre>return   LL_IRQ_DEV_NOT   =&#62; not caused
+         LL_IRQ_DEVICE    =&#62; device has caused irq
+         LL_IRQ_UNKNOWN   =&#62; unknown
+</pre>
+<a name="MT_Info"><h2>Function MT_Info()</h2></a>
+
+<h3>Syntax</h3>
+<pre>int32 MT_Info(
+   int32  infoType,
+   ...
+)
+</pre><h3>Description</h3>
+<pre>Get driver info
+
+Following info codes are supported:
+
+Code                      Description
+------------------------  -----------------------------
+LL_INFO_HW_CHARACTER      hardware characteristics
+LL_INFO_ADDRSPACE_COUNT   nr of required address spaces
+LL_INFO_ADDRSPACE         address space type
+LL_INFO_IRQ               interrupt required
+LL_INFO_LOCKMODE          process lock mode required
+
+</pre><h3>Input</h3>
+<pre>infoType     info code
+...          argument(s)
+</pre><h3>Output</h3>
+<pre>return       success (0) or error code
+</pre>
+<a name="Ident"><h2>Function Ident()</h2></a>
+
+<h3>Syntax</h3>
+<pre>static char* Ident( void )
+</pre><h3>Description</h3>
+<pre>Return ident string
+
+</pre><h3>Input</h3>
+<pre>-
+</pre><h3>Output</h3>
+<pre>return  ptr to ident string
+</pre>
+<a name="Cleanup"><h2>Function Cleanup()</h2></a>
+
+<h3>Syntax</h3>
+<pre>static int32 Cleanup(
+   LL_HANDLE    *llHdl,
+   int32        retCode
+)
+</pre><h3>Description</h3>
+<pre>Close all handles, free memory and return error code
+NOTE: The ll handle is invalid after calling this function
+
+</pre><h3>Input</h3>
+<pre>llHdl      ll handle
+retCode    return value
+</pre><h3>Output</h3>
+<pre>return     retCode
+</pre>
+<a name="DoSleep"><h2>Function DoSleep()</h2></a>
+
+<h3>Syntax</h3>
+<pre>static void DoSleep(
+    LL_HANDLE *llHdl,
+    u_int32 *msec
+)
+</pre><h3>Description</h3>
+<pre>Release devSem, sleep specified time and lock devSem
+
+</pre><h3>Input</h3>
+<pre>llHdl      ll handle
+msec       time to sleep [msec]
+</pre><h3>Output</h3>
+<pre>-
+</pre>
+<a name="AlarmHandler0"><h2>Function AlarmHandler0()</h2></a>
+
+<h3>Syntax</h3>
+<pre>static void AlarmHandler0(void *arg)
+</pre><h3>Description</h3>
+<pre>Handler for alarm 0
+
+</pre><h3>Input</h3>
+<pre>arg        ll handle
+</pre><h3>Output</h3>
+<pre>-
+</pre>
+<a name="AlarmHandler1"><h2>Function AlarmHandler1()</h2></a>
+
+<h3>Syntax</h3>
+<pre>static void AlarmHandler1(void *arg)
+</pre><h3>Description</h3>
+<pre>Handler for alarm 1
+
+</pre><h3>Input</h3>
+<pre>arg        ll handle
+</pre><h3>Output</h3>
+<pre>-
+</pre>
+<a name="CallbackHandler0"><h2>Function CallbackHandler0()</h2></a>
+
+<h3>Syntax</h3>
+<pre>static void CallbackHandler0(void *arg)
+</pre><h3>Description</h3>
+<pre>Handler for callback 0 (alarm)
+
+Trigger callback and pass callback 0 counter value
+as drvArg.
+
+</pre><h3>Input</h3>
+<pre>arg        ll handle
+</pre><h3>Output</h3>
+<pre>-
+</pre>
+<a name="CallbackHandler1"><h2>Function CallbackHandler1()</h2></a>
+
+<h3>Syntax</h3>
+<pre>static void CallbackHandler1(void *arg)
+</pre><h3>Description</h3>
+<pre>Handler for callback 1 (alarm)
+
+Trigger callback and pass callback 1 counter value
+as drvArg.
+
+</pre><h3>Input</h3>
+<pre>arg        ll handle
+</pre><h3>Output</h3>
+<pre>-
+</pre>
+<a name="SharedMemHandler0"><h2>Function SharedMemHandler0()</h2></a>
+
+<h3>Syntax</h3>
+<pre>static void SharedMemHandler0(void *arg)
+</pre><h3>Description</h3>
+<pre>Handler for shared memory 0 access (alarm)
+
+Checks the link counter of shared memory 0. If any links:
+
+Fills the entire shared memory 0 with u_int32 values
+representing the nr of calls of this alarm routine.
+
+</pre><h3>Input</h3>
+<pre>arg        ll handle
+</pre><h3>Output</h3>
+<pre>-
+</pre>
+<a name="SharedMemHandler1"><h2>Function SharedMemHandler1()</h2></a>
+
+<h3>Syntax</h3>
+<pre>static void SharedMemHandler1(void *arg)
+</pre><h3>Description</h3>
+<pre>Handler for shared memory access 1 (alarm)
+
+Checks the link counter of shared memory 1. If any links:
+
+Fills the entire shared memory 1 with u_int32 values
+representing the nr of calls of this alarm routine.
+
+</pre><h3>Input</h3>
+<pre>arg        ll handle
+</pre><h3>Output</h3>
+<pre>-
+</pre></body>
+</html>

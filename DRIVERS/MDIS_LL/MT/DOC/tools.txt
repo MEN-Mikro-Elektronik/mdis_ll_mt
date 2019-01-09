@@ -1,0 +1,366 @@
+Program Description
+===================
+Wed Oct 14 14:13:36 WEDT 2009
+ 
+Overview of all Programs
+------------------------
+
+mt_alarm         - Alarm testing
+mt_bench         - MDIS benchmark test
+mt_busyloop      - Perform MDIS MT drivers MT_BUSYLOOP setstat
+mt_call          - Execute MDIS call and calculate elapsed time
+mt_callback      - Callback testing
+mt_iomode        - Verify MDIS channel i/o mode
+mt_irqmax        - Test maximum interrupt rate
+mt_irqrate       - Interrupt generator
+mt_mdelay        - Perform MDIS MT drivers MT_MDELAY setstat
+mt_pathes        - Verify MDIS path open/close
+mt_semtest       - Perform Semaphore tests with the OSS LIB
+mt_setgetstat    - Set and getstat testing
+mt_shmem         - Shared memory testing
+mt_sleep         - Sleep in MDIS call and calculate elapsed time
+
+Program mt_alarm
+----------------
+
+Usage:
+   mt_alarm [<opts>] <device> [<opts>]
+
+Function:
+   Alarm testing
+
+Options:
+   device       devicename (MT)         [none]   
+   -0=<msec>    alarm 0 rate [msec]     [1000]   
+   -1=<msec>    alarm 1 rate [msec]     [1000]   
+   -m=<mode>    alarm mode              [1]   
+                0 = single   
+                1 = cyclic   
+   -n=<n>       exit after n-alarms     [endless]   
+   
+Description:
+   Simple example program for the MT driver    
+   
+   Alarm testing (using MT driver)   
+   
+Program mt_bench
+----------------
+
+Usage:
+   mt_bench [<opts>] <device> [<opts>]
+
+Function:
+   MDIS benchmark test
+
+Options:
+   device       device name (MT)      [none]   
+   -p=<n>       nr of opened pathes   [%d]   
+   -c=<n>       nr of function calls  [%d]   
+   
+Description:
+   MDIS benchmark test using MT driver   
+   
+   NOTE: "MT" driver must be used for this test                        
+   
+Program mt_busyloop
+-------------------
+
+Usage:
+   mt_busyloop [<opts>] <device> [<opts>]
+
+Function:
+   Perform MDIS MT drivers MT_BUSYLOOP setstat
+
+Options:
+   device       device name (MT)      [none]   
+   -n=<n>       nr of busy loops      [%d]   
+   
+Description:
+   Perform MT driver's MT_BUSYLOOP setstat   
+   
+   NOTE: "MT" driver must be used for this test   
+   
+Program mt_call
+---------------
+
+Usage:
+   mt_call [<opts>] <device> [<opts>]
+
+Function:
+   Execute MDIS call and calculate elapsed time
+
+Options:
+   device       device name (MT)                [none]   
+   -c=<chan>    channel number                  [none]   
+                0..3 = channel   
+   -m=<call>    MDIS call                       [0]   
+                0 = M_read   
+                1 = M_write   
+                2 = M_getblock   
+                3 = M_setblock   
+                4 = M_getstat   
+                5 = M_setstat   
+   -t=<msec>    timeout [msec]                  [0]   
+                0 = no timeout   
+   -l           loop mode                       [off]   
+   -q           quiet mode (print only errors)  [off]   
+   
+Description:
+   Execute MDIS call and calculate elapsed time   
+   
+   Calculates elapsed time and check for timeout   
+   (e.g. for testing process locking)   
+   
+   NOTE: "MT" driver must be used for this test   
+   
+Program mt_callback
+-------------------
+
+Usage:
+   mt_callback [<opts>] <device> [<opts>]
+
+Function:
+   Callback testing
+
+Options:
+   device       devicename (MT)                  [none]   
+   -0=<msec>    callback 0 rate [msec] (0=none)  [500]   
+   -1=<msec>    callback 1 rate [msec] (0=none)  [1000]   
+   -m=<mode>    callback test mode               [1]   
+                0 = single   
+                1 = cyclic   
+   -M           test masking of callbacks        [OFF]   
+   -A=<addr>    callback 0 trigger address       [none]   
+   -B=<addr>    callback 1 trigger address       [none]   
+   
+   -c           produce error: CLEAR illegal callback   
+   -t           produce error: SET callback twice   
+   -n=<n>       exit after n-callbacks           [endless]   
+   -q           quiet mode                       [OFF]   
+   
+Description:
+   Callback testing (using MT driver)   
+   
+   This program allows to install callback funtions 0 and/or 1   
+   and to activate cyclic/single callback alarm on driver.   
+   
+   For time measurement, trigger access can be configured,   
+   which is done in the callback routines.   
+   
+   NOTE: The trigger access feature can only be used   
+   on systems, where memory mapped hardware access   
+   can be done from applications.   
+   
+Program mt_iomode
+-----------------
+
+Usage:
+   mt_iomode [<opts>] <device> [<opts>]
+
+Function:
+   Verify MDIS channel i/o mode
+
+Options:
+   device       device name (MT)      [none]   
+   -n=<max>     nr of opened pathes   [3]   
+   -v           verbose               [off]   
+   
+Description:
+   Verify MDIS channel i/o mode handling (using MT driver)   
+   - set/verify current channel   
+   - no autoincrement mode   
+   - autoincrement mode after success   
+   - autoincrement mode after error   
+   
+   NOTE: "MT" driver must be used for this test   
+   
+Program mt_irqmax
+-----------------
+
+Usage:
+   mt_irqmax [<opts>] <device> [<opts>]
+
+Function:
+   Test maximum interrupt rate
+
+Options:
+   device     devicename (M99)        [none]   
+   -d=<diff>  max deviation (%%)       [10]   
+   
+Description:
+   Test maximum interrupt rate (using M99 driver)   
+   
+Program mt_irqrate
+------------------
+
+Usage:
+   mt_irqrate [<opts>] <device> [<opts>]
+
+Function:
+   Interrupt generator
+
+Options:
+   device     devicename (M99)        [none]   
+   -r=<rate>  irq rate (1..250000 Hz) [1]   
+   -j         irq rate jitter enable  [off]   
+   -n=<n>     exit after n interrupts [endless]   
+   
+Description:
+   Interrupt generator (using M99 driver)   
+   
+Program mt_mdelay
+-----------------
+
+Usage:
+   mt_mdelay [<opts>] <device> [<opts>]
+
+Function:
+   Perform MDIS MT drivers MT_MDELAY setstat
+
+Options:
+   device       device name (MT)      [none]   
+   -t=<us>      usec to delay         [%d]   
+   
+Description:
+   Perform MT driver's MT_MDELAY setstat   
+   
+   NOTE: "MT" driver must be used for this test   
+   
+Program mt_pathes
+-----------------
+
+Usage:
+   mt_pathes [<opts>] <device> [<opts>]
+
+Function:
+   Verify MDIS path open/close
+
+Options:
+   device       device name (MT)      [none]   
+   -n=<max>     nr of opened pathes   [32]   
+   -r=<n>       nr of random tests    [10]   
+   -v           verbose               [off]   
+   
+Description:
+   Verify MDIS path handling (using MT driver)   
+   - open max pathes       
+   - random open/close   
+   
+   NOTE: "MT" driver must be used for this test                        
+   
+Program mt_semtest
+------------------
+
+Usage:
+   mt_semtest [<opts>] <device> [<opts>]
+
+Function:
+   Perform Semaphore tests with the OSS LIB
+
+Options:
+   device       device name (MT)           [none]   
+   -t=<ms>      semaphore timeout in msec  [%d]   
+   -l=<loops>   number of repeat loops     [%d]   
+   -o           perform oss test *   
+   -d           perform desc test *   
+   -e           perform dbg test *   
+   ly at lltest driver with hardware access   
+   
+Description:
+   Test oss semaphores   
+   
+Program mt_setgetstat
+---------------------
+
+Usage:
+   mt_setgetstat [<opts>] <device> [<opts>]
+
+Function:
+   Set and getstat testing
+
+Options:
+   device       devicename (MT)         [none]   
+   -v=<level>   verbose level (1..3)    [1]   
+   -m=<state>   check MBUF Stats        [1]   
+                0 = don't use MBUF   
+                1 = use RD and WR MBUF   
+                2 = use only RD MBUF   
+                3 = use only WR MBUF   
+   -b=<state>   check BBIS Stats ON/OFF [1]   
+                0 = don't use BBIS   
+                1 = use BBIS   
+   -i=<state>   check BLOCK Stats ON/OFF [1]   
+                0 = ignore block stats   
+                1 = use block stats   
+   
+Description:
+   SetGetStat testing   
+   
+Program mt_shmem
+----------------
+
+Usage:
+   mt_shmem [<opts>] <device> [<opts>]
+
+Function:
+   Shared memory testing
+
+Options:
+   device       devicename (MT)                     [none]   
+   -l=<mode>    initialization mode                 [automatic]   
+                0 = create    (UOS_SharedMemSet)   
+                1 = link      (UOS_SharedMemLink)   
+                2 = automatic (create or link)   
+   -i=<nr>      shared memory area index            [0]   
+   -s=<size>    shared memory area size [bytes]     [4]   
+   -r=<rate>    shared memory access rate [msec]    [500]   
+   -m=<mode>    shared memory access mode           [1]   
+                0 = single   
+                1 = cyclic   
+   -n=<n>       exit after n-accesses               [endless]   
+   -q           quiet mode                          [OFF]   
+   
+Description:
+   Shared memory testing (using MT driver)   
+   
+   This program allows to get access to a shared memory area   
+   and to activate cyclic/single driver access to this area.   
+   
+   Access can be get by creating/linking or automatic mode,   
+   where automatic first tries to create and then to link.   
+   
+   The first long word of the shared memory area is polled and   
+   displayed endless or until the read value has n-times been   
+   incremented.   
+   
+Program mt_sleep
+----------------
+
+Usage:
+   mt_sleep [<opts>] <device> [<opts>]
+
+Function:
+   Sleep in MDIS call and calculate elapsed time
+
+Options:
+   device       device name (MT)                [none]   
+   -c=<chan>    channel number                  [0]   
+                0..3 = channel   
+   -m=<call>    MDIS call                       [0]   
+                0 = M_read   
+                1 = M_write   
+                2 = M_getblock   
+                3 = M_setblock   
+                4 = M_getstat   
+                5 = M_setstat   
+   -t=<msec>    time to sleep [msec]            [300]   
+   -l           loop mode                       [off]   
+   -q           quiet mode (print only errors)  [off]   
+   
+Description:
+   Sleep in MDIS call and calculate elapsed time   
+   
+   Calculates elapsed time and check for timeout   
+   (e.g. for testing process locking)   
+   
+   NOTE: "MT" driver must be used for this test   

@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="packagedesc.xsd">
+	<name>mt</name>
+	<description>MDIS5 driver package for MDIS Test driver MT</description>
+	<date>2010-12-01</date>
+	<revision>2.12</revision>
+	<modellist>
+		<model>
+			<hwname>MT</hwname>
+			<description>MT Test Device (default lock mode)</description>
+			<devtype>MDIS</devtype>
+			<busif>M-Module</busif>
+			<swmodulelist>
+			  <swmodule swap="false">
+			    <name>mt</name>
+				<description>MT driver</description>
+				<type>Low Level Driver</type>
+				<makefilepath>MT/DRIVER/COM/driver.mak</makefilepath>
+			  </swmodule>
+			</swmodulelist>
+		</model>
+		<model>
+			<hwname>MT_LM1</hwname>
+			<description>MT Test Device (lock mode 1)</description>
+			<devtype>MDIS</devtype>
+			<busif>M-Module</busif>
+			<swmodulelist>
+			  <swmodule swap="false">
+			    <name>mt_lm1</name>
+				<description>MT_LM1 driver</description>
+				<type>Low Level Driver</type>
+				<makefilepath>MT/DRIVER/COM/driver_lm1.mak</makefilepath>
+				<notos>Windows</notos>
+			  </swmodule>
+			</swmodulelist>
+		</model>
+		<model>
+			<hwname>MT_NOHW</hwname>
+			<description>MT Test Device (default lock mode, without any hardware access)</description>
+			<devtype>MDIS</devtype>
+			<busif>M-Module</busif>
+			<swmodulelist>
+			  <swmodule swap="false">
+			    <name>mt_nohw</name>
+				<description>MT_NOHW driver</description>
+				<type>Low Level Driver</type>
+				<makefilepath>MT/DRIVER/COM/driver_nohw.mak</makefilepath>
+			  </swmodule>
+			</swmodulelist>
+		</model>
+	</modellist>
+	<settinglist>
+		<setting>
+			<name>IRQ_ENABLE</name>
+			<description>enable irq immediately after init</description>
+			<type>U_INT32</type>
+			<defaultvalue>0</defaultvalue>
+			<choises>
+				<choise>
+					<value>0</value>
+					<description>no</description>
+				</choise>
+				<choise>
+					<value>1</value>
+					<description>yes</description>
+				</choise>
+			</choises>
+		</setting>
+		<setting>
+			<name>ID_CHECK</name>
+			<description>Define wether M-Module ID-PROM is checked, don't enable for M99, works only once after power up</description>
+			<type>U_INT32</type>
+			<value>0</value>
+			<defaultvalue>1</defaultvalue>
+			<choises>
+				<choise>
+					<value>0</value>
+					<description>disable -- ignore IDPROM</description>
+				</choise>
+				<choise>
+					<value>1</value>
+					<description>enable</description>
+				</choise>
+			</choises>
+		</setting>
+	</settinglist>
+	<swmodulelist>
+		<swmodule>
+			<name>mt_bench</name>
+			<description>MDIS API speed test</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>MT/TOOLS/MT_BENCH/COM/program.mak</makefilepath>
+		</swmodule>
+		<swmodule internal="true">
+			<name>mt_alarm</name>
+			<description>Alarm test tool</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>MT/TOOLS/MT_ALARM/COM/program.mak</makefilepath>
+		</swmodule>
+		<swmodule internal="true">
+			<name>mt_iomode</name>
+			<description>MDIS channel i/o mode test tool</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>MT/TOOLS/MT_IOMODE/COM/program.mak</makefilepath>
+		</swmodule>
+		<swmodule internal="true">
+			<name>mt_irqmax</name>
+			<description>Maximum interrupt rate test tool</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>MT/TOOLS/MT_IRQMAX/COM/program.mak</makefilepath>
+		</swmodule>
+		<swmodule internal="true">
+			<name>mt_irqrate</name>
+			<description>Interrupt generator test tool</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>MT/TOOLS/MT_IRQRATE/COM/program.mak</makefilepath>
+		</swmodule>
+		<swmodule internal="true">
+			<name>mt_pathes</name>
+			<description>MDIS path handling test tool</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>MT/TOOLS/MT_PATHES/COM/program.mak</makefilepath>
+		</swmodule>
+		<swmodule internal="true">
+			<name>mt_openclose</name>
+			<description>MDIS open/close locking test tool</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>MT/TOOLS/MT_OPENCLOSE/COM/program.mak</makefilepath>
+		</swmodule>
+		<swmodule internal="true">
+			<name>mt_spinltest</name>
+			<description>OSS_SpinLockXxx functions test tool</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>MT/TOOLS/MT_SPINLTEST/COM/program.mak</makefilepath>
+		</swmodule>		
+	</swmodulelist>
+</package>
