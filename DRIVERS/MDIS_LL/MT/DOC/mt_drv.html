@@ -14,7 +14,7 @@
 </head>
 <body>
 <h1>MT driver</h1>
-<p>Wed Oct 14 14:13:23 WEDT 2009</p>
+<p>Wed Jan 16 09:27:41 CET 2019</p>
 <h2>Overview of all Functions</h2>
 <a name="chapt0"><a href="#intro0"><h3>Low level driver for MDIS test purposes</h3></a>
 <TABLE border=1>
@@ -40,6 +40,8 @@
 <TR><TD><P><a href="#CallbackHandler1">CallbackHandler1</a></P></TD><TD><P>Handler for callback 1 (alarm) </P></TD></TR>
 <TR><TD><P><a href="#SharedMemHandler0">SharedMemHandler0</a></P></TD><TD><P>Handler for shared memory 0 access (alarm) </P></TD></TR>
 <TR><TD><P><a href="#SharedMemHandler1">SharedMemHandler1</a></P></TD><TD><P>Handler for shared memory access 1 (alarm) </P></TD></TR>
+<TR><TD><P><a href="#SpinLockAlmHdlr0">SpinLockAlmHdlr0</a></P></TD><TD><P>Handler for spin lock alarm 0 </P></TD></TR>
+<TR><TD><P><a href="#SpinLockAlmHdlr1">SpinLockAlmHdlr1</a></P></TD><TD><P>Handler for spin lock alarm 1 </P></TD></TR>
 </TABLE>
  
 <a name="intro0"><h1>Low level driver for MDIS test purposes </h1></a>
@@ -364,6 +366,9 @@ MT_xxx_ERROR         produce call errors        0..1
 MT_xxx_SLEEP         let calls sleep [msec]     0..max
 MT_ONE_SLEEP         one-shot call sleep mode   0..1
 -------------------  -------------------------  ----------
+MT_SPINL_NO          incr&get cntr, start test  0..max
+MT_SPINL_YES         increment and get counter  0..max
+-------------------  -------------------------  ----------
 
 MT_xxx_ERROR returns if corresponding call errors are
 enabled:
@@ -608,6 +613,30 @@ Checks the link counter of shared memory 1. If any links:
 
 Fills the entire shared memory 1 with u_int32 values
 representing the nr of calls of this alarm routine.
+
+</pre><h3>Input</h3>
+<pre>arg        ll handle
+</pre><h3>Output</h3>
+<pre>-
+</pre>
+<a name="SpinLockAlmHdlr0"><h2>Function SpinLockAlmHdlr0()</h2></a>
+
+<h3>Syntax</h3>
+<pre>static void SpinLockAlmHdlr0(void *arg)
+</pre><h3>Description</h3>
+<pre>Handler for spin lock alarm 0
+
+</pre><h3>Input</h3>
+<pre>arg        ll handle
+</pre><h3>Output</h3>
+<pre>-
+</pre>
+<a name="SpinLockAlmHdlr1"><h2>Function SpinLockAlmHdlr1()</h2></a>
+
+<h3>Syntax</h3>
+<pre>static void SpinLockAlmHdlr1(void *arg)
+</pre><h3>Description</h3>
+<pre>Handler for spin lock alarm 1
 
 </pre><h3>Input</h3>
 <pre>arg        ll handle

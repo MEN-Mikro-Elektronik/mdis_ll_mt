@@ -1,6 +1,6 @@
 Function Description
 ====================
-Wed Oct 14 14:13:25 WEDT 2009
+Wed Jan 16 09:27:41 CET 2019
  
 Overview of all Functions
 -------------------------
@@ -25,6 +25,8 @@ CallbackHandler0       - Handler for callback 0 (alarm)
 CallbackHandler1       - Handler for callback 1 (alarm) 
 SharedMemHandler0      - Handler for shared memory 0 access (alarm) 
 SharedMemHandler1      - Handler for shared memory access 1 (alarm) 
+SpinLockAlmHdlr0       - Handler for spin lock alarm 0 
+SpinLockAlmHdlr1       - Handler for spin lock alarm 1 
  
 
 Function MT_GetEntryX()
@@ -319,6 +321,9 @@ Description:
     MT_xxx_ERROR         produce call errors        0..1
     MT_xxx_SLEEP         let calls sleep [msec]     0..max
     MT_ONE_SLEEP         one-shot call sleep mode   0..1
+    -------------------  -------------------------  ----------
+    MT_SPINL_NO          incr&get cntr, start test  0..max
+    MT_SPINL_YES         increment and get counter  0..max
     -------------------  -------------------------  ----------
 
     MT_xxx_ERROR returns if corresponding call errors are
@@ -616,6 +621,38 @@ Description:
 
     Fills the entire shared memory 1 with u_int32 values
     representing the nr of calls of this alarm routine.
+
+Input:
+    arg        ll handle
+
+Output:
+    -
+
+
+Function SpinLockAlmHdlr0()
+---------------------------
+
+Syntax:
+    static void SpinLockAlmHdlr0(void *arg)
+
+Description:
+    Handler for spin lock alarm 0
+
+Input:
+    arg        ll handle
+
+Output:
+    -
+
+
+Function SpinLockAlmHdlr1()
+---------------------------
+
+Syntax:
+    static void SpinLockAlmHdlr1(void *arg)
+
+Description:
+    Handler for spin lock alarm 1
 
 Input:
     arg        ll handle
