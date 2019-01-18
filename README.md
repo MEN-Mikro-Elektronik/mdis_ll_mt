@@ -36,8 +36,7 @@
 - Micro Delay (OSS_MikroDelay)
 - Error simulation
 
-
-[MT driver documentation (auto generated)](DRIVERS/MDIS_LL/MT/DOC/mt_drv.html)
+[MT driver documentation (auto generated)](DRIVERS/MDIS_LL/MT/DOC/mt_drv.txt)
 
 
 
