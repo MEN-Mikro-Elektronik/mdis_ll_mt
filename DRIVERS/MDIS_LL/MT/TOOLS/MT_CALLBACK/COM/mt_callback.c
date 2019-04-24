@@ -78,6 +78,7 @@ static char RCSid[]="$Id: mt_callback.c,v 1.7 2009/10/07 10:52:55 CKauntz Exp $"
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 #ifdef OS9
 #include <process.h>

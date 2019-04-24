@@ -1574,6 +1574,11 @@ int32 MT_Info(
 			u_int32 *addrModeP = va_arg(argptr, u_int32*);
 			u_int32 *dataModeP = va_arg(argptr, u_int32*);
 			u_int32 *addrSizeP = va_arg(argptr, u_int32*);
+			/* Prevent unused variable compiler warning */
+			(void)addrSpaceIndex;
+			(void)addrModeP;
+			(void)dataModeP;
+			(void)addrSizeP;
 
 #ifndef MT_PCI
 	#ifdef NO_HWACCESS
