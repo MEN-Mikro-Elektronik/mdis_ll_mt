@@ -11,12 +11,12 @@
 			<devtype>MDIS</devtype>
 			<busif>M-Module</busif>
 			<swmodulelist>
-			  <swmodule swap="false">
-			    <name>mt</name>
-				<description>MT driver</description>
-				<type>Low Level Driver</type>
-				<makefilepath>MT/DRIVER/COM/driver.mak</makefilepath>
-			  </swmodule>
+				<swmodule swap="false">
+					<name>mt</name>
+					<description>MT driver</description>
+					<type>Low Level Driver</type>
+					<makefilepath>MT/DRIVER/COM/driver.mak</makefilepath>
+				</swmodule>
 			</swmodulelist>
 		</model>
 		<model>
@@ -25,13 +25,13 @@
 			<devtype>MDIS</devtype>
 			<busif>M-Module</busif>
 			<swmodulelist>
-			  <swmodule swap="false">
-			    <name>mt_lm1</name>
-				<description>MT_LM1 driver</description>
-				<type>Low Level Driver</type>
-				<makefilepath>MT/DRIVER/COM/driver_lm1.mak</makefilepath>
-				<notos>Windows</notos>
-			  </swmodule>
+				<swmodule swap="false">
+					<name>mt_lm1</name>
+					<description>MT_LM1 driver</description>
+					<type>Low Level Driver</type>
+					<makefilepath>MT/DRIVER/COM/driver_lm1.mak</makefilepath>
+					<notos>Windows</notos>
+				</swmodule>
 			</swmodulelist>
 		</model>
 		<model>
@@ -40,12 +40,12 @@
 			<devtype>MDIS</devtype>
 			<busif>M-Module</busif>
 			<swmodulelist>
-			  <swmodule swap="false">
-			    <name>mt_nohw</name>
-				<description>MT_NOHW driver</description>
-				<type>Low Level Driver</type>
-				<makefilepath>MT/DRIVER/COM/driver_nohw.mak</makefilepath>
-			  </swmodule>
+				<swmodule swap="false">
+					<name>mt_nohw</name>
+					<description>MT_NOHW driver</description>
+					<type>Low Level Driver</type>
+					<makefilepath>MT/DRIVER/COM/driver_nohw.mak</makefilepath>
+				</swmodule>
 			</swmodulelist>
 		</model>
 	</modellist>
@@ -132,6 +132,14 @@
 			<description>OSS_SpinLockXxx functions test tool</description>
 			<type>Driver Specific Tool</type>
 			<makefilepath>MT/TOOLS/MT_SPINLTEST/COM/program.mak</makefilepath>
-		</swmodule>		
+		</swmodule>
+		<swmodule internal="true">
+			<name>mt_callback</name>
+			<description>MDIS callback test tool</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>MT/TOOLS/MT_CALLBACK/COM/program.mak</makefilepath>
+			<notos>Linux</notos>
+			<notos>Windows</notos>
+		</swmodule>
 	</swmodulelist>
 </package>
