@@ -547,14 +547,14 @@ int32 MT_Init(
     |  init semaphores              |
     +------------------------------*/
 	/* create binary semaphore */
-	if ( error = OSS_SemCreate(llHdl->osHdl, OSS_SEM_BIN, 1,
-					&llHdl->semBinHdl )){
+	if ( (error = OSS_SemCreate(llHdl->osHdl, OSS_SEM_BIN, 1,
+					&llHdl->semBinHdl)) ){
 		DBGWRT_ERR((DBH," *** MT_Init: Error creating binary semaphore\n"));
 		return(Cleanup(llHdl, error));
 	}
 	/* create binary semaphore */
-	if ( error = OSS_SemCreate(llHdl->osHdl, OSS_SEM_COUNT, MAX_SEMAPHORE_CNT,
-					&llHdl->semCntHdl )){
+	if ( (error = OSS_SemCreate(llHdl->osHdl, OSS_SEM_COUNT, MAX_SEMAPHORE_CNT,
+					&llHdl->semCntHdl)) ){
 		DBGWRT_ERR((DBH," *** MT_Init: Error creating counter semaphore\n"));
 		return(Cleanup(llHdl, error));
 	}
@@ -1043,19 +1043,19 @@ int32 MT_SetStat(
         |  semaphores               |
         +--------------------------*/
 		case MT_SEM_BIN_TAK:
-			if (error = OSS_SemWait(llHdl->osHdl,llHdl->semBinHdl,value))
+			if ((error = OSS_SemWait(llHdl->osHdl,llHdl->semBinHdl,value)))
 				return(error);
 			break;
 		case MT_SEM_BIN_REL:
-			if (error = OSS_SemSignal(llHdl->osHdl,llHdl->semBinHdl))
+			if ((error = OSS_SemSignal(llHdl->osHdl,llHdl->semBinHdl)))
 				return(error);
 			break;
 		case MT_SEM_CNT_TAK:
-			if (error = OSS_SemWait(llHdl->osHdl,llHdl->semCntHdl,value))
+			if ((error = OSS_SemWait(llHdl->osHdl,llHdl->semCntHdl,value)))
 				return(error);
 			break;
 		case MT_SEM_CNT_REL:
-			if (error = OSS_SemSignal(llHdl->osHdl,llHdl->semCntHdl))
+			if ((error = OSS_SemSignal(llHdl->osHdl,llHdl->semCntHdl)))
 				return(error);
 			break;
         /*--------------------------+
@@ -1215,7 +1215,9 @@ int32 MT_GetStat(
 {
 	int32		*valueP   = (int32*)value32_or_64P;	 /* pointer to 32bit value  */
 	INT32_OR_64	*value64P = value32_or_64P;			 /* stores 32/64bit pointer */
+#ifndef NO_CALLBACK
 	M_SG_BLOCK	*blk   = (M_SG_BLOCK*)value32_or_64P; /* stores block struct pointer */
+#endif
 	int32		error = ERR_SUCCESS;
 
     DBGWRT_1((DBH, "LL - MT_GetStat: ch=%d code=0x%04x\n",

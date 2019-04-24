@@ -131,7 +131,7 @@ static void CallbackFkt_0(void *appArg, void *drvArg)
 	if (!G_Quiet)
 		printf(">>> %8ld[ms]: CallbackFkt_0: appArg=0x%x, drvArg=0x%x\n",
 			   UOS_MsecTimerGet()-G_startTime,
-			   (int)appArg, (int)drvArg);
+			   (intptr_t)appArg, (int)drvArg);
 
 	G_CallbackCnt_0++;
 }
@@ -148,7 +148,7 @@ static void CallbackFkt_1(void *appArg, void *drvArg)
 	if (!G_Quiet)
 		printf(">>> %8ld[ms]: CallbackFkt_1: appArg=0x%x, drvArg=0x%x\n",
 			   UOS_MsecTimerGet()-G_startTime,
-			   (int)appArg, (int)drvArg);
+			   (intptr_t)appArg, (int)drvArg);
 
 	G_CallbackCnt_1++;
 }
