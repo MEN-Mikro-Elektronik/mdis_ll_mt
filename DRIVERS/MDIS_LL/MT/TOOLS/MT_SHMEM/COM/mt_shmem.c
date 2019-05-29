@@ -23,27 +23,6 @@
  *     Required: usr_oss.l usr_utl.l
  *     Switches: -
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: mt_shmem.c,v $
- * Revision 1.5  2009/10/07 10:53:16  CKauntz
- * R:1. path not 64 bit compatible
- *   2. Setstat for MSG_BLK not 64 bit compatible
- * M:1. Changed path type to MDIS_PATH
- *   2. Changed to blk cast to INT32_OR_64
- *
- * Revision 1.4  1999/07/05 08:17:32  kp
- * cosmetics
- *
- * Revision 1.3  1999/04/16 16:26:43  Franke
- * cosmetics
- * removed exit call
- *
- * Revision 1.2  1999/03/22 15:30:34  see
- * changes according to modified shared mem interface
- *
- * Revision 1.1  1998/09/18 14:06:53  see
- * Added by mcvs
  *
  *---------------------------------------------------------------------------
  * Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH

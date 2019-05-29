@@ -17,28 +17,6 @@
  *     Required: usr_oss.l usr_utl.l
  *     Switches: -
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: mt_pathes.c,v $
- * Revision 1.6  2009/10/07 10:53:07  CKauntz
- * R: path not 64 bit compatible
- * M: Changed path type to MDIS_PATH
- *
- * Revision 1.5  1999/07/20 12:20:58  Franke
- * cosmetics
- *
- * Revision 1.4  1999/07/05 08:17:10  kp
- * cosmetics
- *
- * Revision 1.3  1998/09/10 10:20:51  see
- * ported to changed USR_UTL calls
- *
- * Revision 1.2  1998/07/02 16:56:25  see
- * OS-9 code removed, changed for using UOS and UTL lib
- * include usr_oss.h and usr_utl.h
- *
- * Revision 1.1  1998/07/01 16:46:44  see
- * Initial Revision
  *
  *---------------------------------------------------------------------------
  * Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH

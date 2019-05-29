@@ -18,23 +18,7 @@
  *     Required: usr_oss.l usr_utl.l
  *     Switches: -
  *
- *-------------------------------[ History ]---------------------------------
  *
- * $Log: mt_call.c,v $
- * Revision 1.4  2009/10/07 10:52:52  CKauntz
- * R: path not 64 bit compatible
- * M: Changed path type to MDIS_PATH
- *
- * Revision 1.3  1999/07/05 08:12:50  kp
- * cosmetics
- *
- * Revision 1.2  1999/04/16 16:26:38  Franke
- * cosmetics
- *
- * Revision 1.1  1998/09/10 10:21:06  see
- * Added by mcvs
- *
- * cloned from mt_sleep.c Revision 1.2
  *---------------------------------------------------------------------------
  * Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH
  ****************************************************************************/

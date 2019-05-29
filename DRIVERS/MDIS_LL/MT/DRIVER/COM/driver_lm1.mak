@@ -7,16 +7,6 @@
 #    Description: Makefile definitions for the MT_LM1 driver
 #		  		  LOCKMODE 1 is no locking
 #
-#---------------------------------[ History ]---------------------------------
-#
-#   $Log: driver_lm1.mak,v $
-#   Revision 1.2  2009/10/07 10:27:01  CKauntz
-#   R: PLD library not used
-#   M: Removed pld library
-#
-#   Revision 1.1  1999/07/05 08:05:28  kp
-#   Initial Revision
-#
 #-----------------------------------------------------------------------------
 #   Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH
 #*****************************************************************************

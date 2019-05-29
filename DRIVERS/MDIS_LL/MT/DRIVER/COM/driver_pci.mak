@@ -7,16 +7,6 @@
 #    Description: Makefile definitions for the MT_PCI driver
 #		  		  MK functionality test with P10
 #
-#---------------------------------[ History ]---------------------------------
-#
-#   $Log: driver_pci.mak,v $
-#   Revision 1.2  2009/10/07 10:28:41  CKauntz
-#   R: PLD library not used
-#   M: Removed pld library
-#
-#   Revision 1.1  1999/08/11 10:51:53  kp
-#   Initial Revision
-#
 #-----------------------------------------------------------------------------
 #   Copyright (c) 1999-2019, MEN Mikro Elektronik GmbH
 #*****************************************************************************

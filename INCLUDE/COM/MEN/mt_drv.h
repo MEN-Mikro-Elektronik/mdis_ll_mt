@@ -13,34 +13,6 @@
  *     Switches: _ONE_NAMESPACE_PER_DRIVER_
  *               _LL_DRV_
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: mt_drv.h,v $
- * Revision 2.7  2010/12/01 12:20:21  dpfeuffer
- * R: OSS_SpinLockXxx introduction
- * M: getstat codes for spin lock test added
- *
- * Revision 2.6  2009/10/07 10:53:23  CKauntz
- * R:1. Driver ported to MDIS5, new MDIS_API and men_typs
- *   2. New setstat defines for semaphore tests
- * M:1. For backward compatibility to MDIS4 optionally define new types
- *   2. Added defines for semphore tests
- *
- * Revision 2.5  1999/07/05 15:09:05  kp
- * added MT_BUSYLOOP, MT_MDELAY
- *
- * Revision 2.4  1999/04/14 17:29:30  Franke
- * changed only the function MT_GetEntry_LockMode0..3 will be exported
- *
- * Revision 2.3  1998/09/18 14:06:55  see
- * shared mem structs and codes added
- *
- * Revision 2.2  1998/09/10 10:21:12  see
- * MT_ONE_SLEEP code added
- * MT_BLK_CALLBACK added
- *
- * Revision 2.1  1998/05/28 13:50:59  see
- * Initial Revision
  *
  *---------------------------------------------------------------------------
  * Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH

@@ -6,15 +6,6 @@
 #
 #    Description: Makefile definitions for MT tools
 #
-#---------------------------------[ History ]---------------------------------
-#
-#   $Log: program.mak,v $
-#   Revision 1.2  1999/04/16 16:26:41  Franke
-#   cosmetics
-#
-#   Revision 1.1  1998/09/18 14:06:50  see
-#   Added by mcvs
-#
 #-----------------------------------------------------------------------------
 #   Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH
 #*****************************************************************************

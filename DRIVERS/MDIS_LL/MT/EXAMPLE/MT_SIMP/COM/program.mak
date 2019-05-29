@@ -6,12 +6,6 @@
 #
 #    Description: Makefile definitions for the MT example program
 #
-#---------------------------------[ History ]---------------------------------
-#
-#   $Log: program.mak,v $
-#   Revision 1.1  1998/07/31 17:24:32  see
-#   Added by mcvs
-#
 #-----------------------------------------------------------------------------
 #   Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH
 #*****************************************************************************

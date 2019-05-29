@@ -18,11 +18,6 @@
  *     Required: usr_oss.l usr_utl.l
  *     Switches: none
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: mt_spinltest.c,v $
- * Revision 1.1  2010/12/01 12:20:20  dpfeuffer
- * Initial Revision
  *
  *---------------------------------------------------------------------------
  * Copyright (c) 2010-2019, MEN Mikro Elektronik GmbH

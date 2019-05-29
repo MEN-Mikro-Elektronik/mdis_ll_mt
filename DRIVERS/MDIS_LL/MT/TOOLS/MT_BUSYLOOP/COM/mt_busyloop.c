@@ -15,18 +15,6 @@
  *     Required: usr_oss.l usr_utl.l
  *     Switches: -
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: mt_busyloop.c,v $
- * Revision 1.3  2009/10/07 10:52:50  CKauntz
- * R: path not 64 bit compatible
- * M: Changed path type to MDIS_PATH
- *
- * Revision 1.2  1999/07/20 12:19:57  Franke
- * cosmetics
- *
- * Revision 1.1  1999/07/05 08:12:13  kp
- * Initial Revision
  *
  *---------------------------------------------------------------------------
  * Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH

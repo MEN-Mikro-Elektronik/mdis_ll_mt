@@ -7,23 +7,6 @@
 #    Description: Makefile definitions for the MT driver
 #		  		  LOCKMODE 0 (unknown)
 #
-#---------------------------------[ History ]---------------------------------
-#
-#   $Log: driver.mak,v $
-#   Revision 1.4  2008/08/29 11:45:57  dpfeuffer
-#   R: unused libs and header specified
-#   M: unused libs and header removed
-#
-#   Revision 1.3  1999/07/05 08:04:47  kp
-#   use lockmode=0
-#
-#   Revision 1.2  1999/04/16 16:26:20  Franke
-#   added LOCKMODE switch
-#   renamed MAK_NAME from mt to mt2
-#
-#   Revision 1.1  1998/05/28 09:58:30  see
-#   Initial Revision
-#
 #-----------------------------------------------------------------------------
 #   Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH
 #*****************************************************************************

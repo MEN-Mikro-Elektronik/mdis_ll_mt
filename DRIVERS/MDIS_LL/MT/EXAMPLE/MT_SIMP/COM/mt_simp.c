@@ -13,18 +13,6 @@
  *     Required: MDIS user interface library
  *     Switches: NO_MAIN_FUNC	(for systems with one namespace)
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: mt_simp.c,v $
- * Revision 1.3  2009/10/07 10:52:42  CKauntz
- * R: path not 64 bit compatible
- * M: Changed path type to MDIS_PATH
- *
- * Revision 1.2  1999/04/16 16:26:32  Franke
- * cosmetics
- *
- * Revision 1.1  1998/07/31 17:24:34  see
- * Added by mcvs
  *
  *---------------------------------------------------------------------------
  * Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH

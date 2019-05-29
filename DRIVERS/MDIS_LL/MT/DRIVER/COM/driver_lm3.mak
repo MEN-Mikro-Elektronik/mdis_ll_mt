@@ -7,16 +7,6 @@
 #    Description: Makefile definitions for the MT_LM2 driver
 #		  		  LOCKMODE 3 is channel locking
 #
-#---------------------------------[ History ]---------------------------------
-#
-#   $Log: driver_lm3.mak,v $
-#   Revision 1.2  2009/10/07 10:27:43  CKauntz
-#   R: PLD library not used
-#   M: Removed pld library
-#
-#   Revision 1.1  1999/07/05 08:05:32  kp
-#   Initial Revision
-#
 #-----------------------------------------------------------------------------
 #   Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH
 #*****************************************************************************

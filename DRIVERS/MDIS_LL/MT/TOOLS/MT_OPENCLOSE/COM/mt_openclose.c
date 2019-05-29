@@ -27,11 +27,6 @@
  *     Required: usr_oss.l usr_utl.l
  *     Switches: WINNT - compile for Windows
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: mt_openclose.c,v $
- * Revision 1.1  2010/10/08 15:11:50  dpfeuffer
- * Initial Revision
  *
  *---------------------------------------------------------------------------
  * Copyright (c) 2010-2019, MEN Mikro Elektronik GmbH

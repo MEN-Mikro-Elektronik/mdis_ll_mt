@@ -7,16 +7,6 @@
 #    Description: Makefile definitions for the MT driver
 #		  		  - makes never a HW access and requests no address space
 #
-#---------------------------------[ History ]---------------------------------
-#
-#   $Log: driver_nohw.mak,v $
-#   Revision 1.2  2008/08/29 11:45:59  dpfeuffer
-#   R: unused libs and header specified
-#   M: unused libs and header removed
-#
-#   Revision 1.1  2004/06/22 13:53:50  dpfeuffer
-#   Initial Revision
-#
 #-----------------------------------------------------------------------------
 #   Copyright (c) 2019, MEN Mikro Elektronik GmbH
 #*****************************************************************************

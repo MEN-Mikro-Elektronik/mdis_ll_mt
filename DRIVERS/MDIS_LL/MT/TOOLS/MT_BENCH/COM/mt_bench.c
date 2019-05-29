@@ -15,38 +15,6 @@
  *     Required: usr_oss.l usr_utl.l
  *     Switches: -
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: mt_bench.c,v $
- * Revision 1.8  2009/10/07 10:52:47  CKauntz
- * R: path not 64 bit compatible
- * M: Changed path type to MDIS_PATH
- *
- * Revision 1.7  2004/03/19 11:08:00  ub
- * QNX settings added
- *
- * Revision 1.6  2002/06/11 16:00:22  DSchmidt
- * VCIRTX defines were wrong
- *
- * Revision 1.5  2000/08/29 16:42:09  Schmidt
- * 1) VCIRTX specific includes moved to VCIRTX section
- * 2) WINNT specifics added
- *
- * Revision 1.4  2000/06/14 14:38:09  Schmidt
- * macros for high resolution timer added
- * timer resolution now from UOS_MsecTimerResolution function, cosmetics
- * added VCIRTX switches
- *
- * Revision 1.3  1999/07/05 08:10:31  kp
- * added OS9000 switches
- * cosmetics
- *
- * Revision 1.2  1999/04/14 17:31:21  Franke
- * removed bug if first M_open dt != tickres
- * cosmetics
- *
- * Revision 1.1  1998/09/10 10:21:11  see
- * Added by mcvs
  *
  *---------------------------------------------------------------------------
  * Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH
