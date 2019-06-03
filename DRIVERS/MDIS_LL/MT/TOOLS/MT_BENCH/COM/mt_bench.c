@@ -5,8 +5,6 @@
  ****************************************************************************
  *  
  *       Author: see
- *        $Date: 2009/10/07 10:52:47 $
- *    $Revision: 1.8 $
  *
  *  Description: MDIS benchmark test using MT driver
  *                      
@@ -35,7 +33,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-static const char RCSid[]="$Id: mt_bench.c,v 1.8 2009/10/07 10:52:47 CKauntz Exp $";
 
 #include <stdio.h>
 
@@ -136,6 +133,8 @@ static const char RCSid[]="$Id: mt_bench.c,v 1.8 2009/10/07 10:52:47 CKauntz Exp
 # define OPENS      10  /* number of opened paths */
 
 # include <taskLib.h>
+
+static const char IdentString[]=MENT_XSTR(MAK_REVISION);
 # undef  TASKLOCK
 # undef  TASKUNLOCK
 # define TASKLOCK	(taskLock())
@@ -203,7 +202,7 @@ static void usage(void)
 	printf("    -p=<n>       nr of opened pathes   [%d]\n",OPENS);   
 	printf("    -c=<n>       nr of function calls  [%d]\n",CALLS);   
 	printf("\n");
-	printf("(c) 1998..2000 by MEN mikro elektronik GmbH\n%s\n\n",RCSid);
+	printf("Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH\n%s\n\n",IdentString);
 }
 
 /********************************* main *************************************

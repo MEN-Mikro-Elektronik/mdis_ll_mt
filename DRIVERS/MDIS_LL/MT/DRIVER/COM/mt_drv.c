@@ -1,11 +1,9 @@
 /*********************  P r o g r a m  -  M o d u l e ***********************
  *
  *         Name: mt_drv.c
- *      Project: MT module driver (MDIS V4.x)
+ *      Project: MT module driver 
  *
  *       Author: see
- *        $Date: 2010/12/01 12:20:17 $
- *    $Revision: 1.20 $
  *
  *  Description: Low level driver for MDIS test purposes
  *
@@ -81,7 +79,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-static const char RCSid[]="MT - MT Low Level Driver: $Id: mt_drv.c,v 1.20 2010/12/01 12:20:17 dpfeuffer Exp $";
 
 #define _NO_LL_HANDLE		/* ll_defs.h: don't define LL_HANDLE struct */
 
@@ -202,6 +199,8 @@ typedef struct {
 /* include files which need LL_HANDLE */
 #include <MEN/ll_entry.h>   /* low level driver jumptable  */
 #include <MEN/mt_drv.h>   	/* MT driver header file */
+
+static const char IdentString[]=MENT_XSTR(MAK_REVISION);
 
 /*-----------------------------------------+
 |  PROTOTYPES                              |
@@ -1591,7 +1590,7 @@ int32 MT_Info(
  ****************************************************************************/
 static char* Ident( void )
 {
-    return( (char*) RCSid );
+    return( (char*) IdentString );
 }
 
 /********************************* Cleanup **********************************

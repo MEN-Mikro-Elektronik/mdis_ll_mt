@@ -5,8 +5,6 @@
  ****************************************************************************
  *  
  *       Author: dieter.pfeuffer@men.de
- *        $Date: 2010/12/01 12:20:20 $
- *    $Revision: 1.1 $
  *
  *  Description: Verify OSS_SpinLockXxx functions
  *
@@ -47,6 +45,8 @@
 #include <MEN/mdis_api.h>
 #include <MEN/mt_drv.h>
 
+static const char IdentString[]=MENT_XSTR(MAK_REVISION);
+
 /*--------------------------------------+
 |   DEFINES                             |
 +--------------------------------------*/
@@ -60,7 +60,6 @@
 |   PROTOTYPES                          |
 +--------------------------------------*/
 static void usage(void);
-static char IdentString[]="$Id: mt_spinltest.c,v 1.1 2010/12/01 12:20:20 dpfeuffer Exp $\n";
 
 /********************************* usage ************************************
  *
@@ -80,7 +79,7 @@ static void usage(void)
 	printf("    -d=<ms>      ms [ms] between M_getstat calls        [11]\n");
 	printf("    -v           verbose                                [off]\n");
 	printf("\n");
-	printf("(c) 2010 by MEN mikro elektronik GmbH, V%.15s\n\n", IdentString+22);
+	printf("Copyright (c) 2010-2019, MEN Mikro Elektronik GmbH\n%s\n\n", IdentString);
 }
 
 /********************************* main *************************************

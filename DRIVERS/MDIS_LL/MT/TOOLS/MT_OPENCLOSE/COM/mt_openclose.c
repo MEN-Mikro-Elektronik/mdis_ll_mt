@@ -5,8 +5,6 @@
  ****************************************************************************
  *  
  *       Author: dieter.pfeuffer@men.de
- *        $Date: 2010/10/08 15:11:50 $
- *    $Revision: 1.1 $
  *
  *  Description: Verify MDIS open/close locking
  *
@@ -59,6 +57,8 @@
 #include <MEN/usr_utl.h>
 #include <MEN/mdis_api.h>
 
+static const char IdentString[]=MENT_XSTR(MAK_REVISION);
+
 /*--------------------------------------+
 |   DEFINES                             |
 +--------------------------------------*/
@@ -84,7 +84,6 @@ typedef struct {
 |   PROTOTYPES                          |
 +--------------------------------------*/
 static void usage(void);
-static char IdentString[]="$Id: mt_openclose.c,v 1.1 2010/10/08 15:11:50 dpfeuffer Exp $\n";
 #ifdef WINNT
 	static int32 ThreadEntry( THREAD_CTX *ctx );
 #endif /* WINNT */
@@ -113,7 +112,7 @@ static void usage(void)
 #endif /* WINNT */
 	printf("    -v           verbose                                [off]\n");
 	printf("\n");
-	printf("(c) 2010 by MEN mikro elektronik GmbH, V%.15s\n\n", IdentString+22);
+	printf("Copyright (c) 2010-2019, MEN Mikro Elektronik GmbH\n%s\n\n", IdentString);
 }
 
 /********************************* main *************************************

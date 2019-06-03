@@ -5,8 +5,6 @@
  ****************************************************************************
  *
  *       Author: kp
- *        $Date: 2009/10/07 10:52:50 $
- *    $Revision: 1.3 $
  *
  *  Description: Perform MT driver's MT_BUSYLOOP setstat
  *
@@ -35,7 +33,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-static const char RCSid[]="$Id: mt_busyloop.c,v 1.3 2009/10/07 10:52:50 CKauntz Exp $";
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -45,6 +42,8 @@ static const char RCSid[]="$Id: mt_busyloop.c,v 1.3 2009/10/07 10:52:50 CKauntz 
 #include <MEN/usr_utl.h>
 #include <MEN/mdis_api.h>
 #include <MEN/mt_drv.h>
+
+static const char IdentString[]=MENT_XSTR(MAK_REVISION);
 
 /*--------------------------------------+
 |   DEFINES                             |
@@ -86,7 +85,7 @@ static void usage(void)
 	printf("    device       device name (MT)      [none]\n");
 	printf("    -n=<n>       nr of busy loops      [%d]\n",LOOPS);
 	printf("\n");
-	printf("(c) 1999 by MEN mikro elektronik GmbH\n%s\n\n",RCSid);
+	printf("Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH\n%s\n\n",IdentString);
 }
 
 /********************************* main *************************************

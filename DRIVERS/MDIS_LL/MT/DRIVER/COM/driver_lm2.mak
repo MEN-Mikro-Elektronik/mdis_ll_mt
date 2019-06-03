@@ -1,8 +1,6 @@
 #***************************  M a k e f i l e  *******************************
 #
 #         Author: see
-#          $Date: 2009/10/07 10:27:23 $
-#      $Revision: 1.2 $
 #
 #    Description: Makefile definitions for the MT_LM2 driver
 #		  		  LOCKMODE 2 is call locking
@@ -24,6 +22,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 MAK_NAME=mt_lm2
+# the next line is updated during the MDIS installation
+STAMPED_REVISION="6c13a9b-dirty_2019-05-29"
+
+DEF_REVISION=MAK_REVISION=$(STAMPED_REVISION)
 
 MAK_LIBS=$(LIB_PREFIX)$(MEN_LIB_DIR)/desc$(LIB_SUFFIX)     \
          $(LIB_PREFIX)$(MEN_LIB_DIR)/mbuf$(LIB_SUFFIX)     \
@@ -47,6 +49,7 @@ MAK_INCL=$(MEN_INC_DIR)/mt_drv.h     \
          $(MEN_INC_DIR)/dbg.h    \
 
 MAK_SWITCH=$(SW_PREFIX)LOCKMODE=2 \
+		$(SW_PREFIX)$(DEF_REVISION) \
 		   $(SW_PREFIX)MAC_MEM_MAPPED
 
 MAK_INP1=mt_drv$(INP_SUFFIX)

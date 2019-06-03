@@ -5,8 +5,6 @@
  ****************************************************************************
  *  
  *       Author: see
- *        $Date: 2009/10/07 10:53:00 $
- *    $Revision: 1.7 $
  *
  *  Description: Test maximum interrupt rate (using M99 driver)
  *                      
@@ -33,7 +31,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-static char RCSid[]="$Id: mt_irqmax.c,v 1.7 2009/10/07 10:53:00 CKauntz Exp $";
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -43,6 +40,8 @@ static char RCSid[]="$Id: mt_irqmax.c,v 1.7 2009/10/07 10:53:00 CKauntz Exp $";
 #include <MEN/usr_oss.h>
 #include <MEN/usr_utl.h>
 #include <MEN/m99_drv.h>
+
+static const char IdentString[]=MENT_XSTR(MAK_REVISION);
 
 /*--------------------------------------+
 |   DEFINES                             |
@@ -82,7 +81,7 @@ static void usage(void)
 	printf("    device     devicename (M99)        [none]\n");
     printf("    -d=<diff>  max deviation (%%)       [10]\n");
 	printf("\n");
-	printf("(c) 1998 by MEN mikro elektronik GmbH, %s\n\n",RCSid);
+	printf("Copyright (c) 1996-2019, MEN Mikro Elektronik GmbH\n%s\n\n",IdentString);
 }
 
 /********************************* main *************************************

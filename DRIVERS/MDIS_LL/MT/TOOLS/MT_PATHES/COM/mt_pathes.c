@@ -5,8 +5,6 @@
  ****************************************************************************
  *  
  *       Author: see
- *        $Date: 2009/10/07 10:53:07 $
- *    $Revision: 1.6 $
  *
  *  Description: Verify MDIS path handling (using MT driver)
  *               - open max pathes    
@@ -37,7 +35,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-static const char RCSid[]="$Id: mt_pathes.c,v 1.6 2009/10/07 10:53:07 CKauntz Exp $";
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -47,10 +44,11 @@ static const char RCSid[]="$Id: mt_pathes.c,v 1.6 2009/10/07 10:53:07 CKauntz Ex
 #include <MEN/usr_utl.h>
 #include <MEN/mdis_api.h>
 
+static const char IdentString[]=MENT_XSTR(MAK_REVISION);
+
 /*--------------------------------------+
 |   DEFINES                             |
 +--------------------------------------*/
-#define REV "V1.0"      /* program revision */
 
 #define VERBOSE(_x_) 	if (verbose) printf _x_
 
@@ -94,7 +92,7 @@ static void usage(void)
 	printf("    -r=<n>       nr of random tests    [10]\n");
 	printf("    -v           verbose               [off]\n");
 	printf("\n");
-	printf("(c) 1998 by MEN mikro elektronik GmbH, %s\n\n",REV);
+	printf("Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH\n%s\n\n", IdentString);
 }
 
 /********************************* main *************************************

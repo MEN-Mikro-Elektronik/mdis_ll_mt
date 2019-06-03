@@ -5,8 +5,6 @@
  ****************************************************************************
  *  
  *       Author: see
- *        $Date: 2009/10/07 10:52:45 $
- *    $Revision: 1.7 $
  *
  *  Description: Alarm testing (using MT driver)
  *                      
@@ -33,7 +31,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-static char RCSid[]="$Id: mt_alarm.c,v 1.7 2009/10/07 10:52:45 CKauntz Exp $";
 
 #include <stdio.h>
 
@@ -43,6 +40,8 @@ static char RCSid[]="$Id: mt_alarm.c,v 1.7 2009/10/07 10:52:45 CKauntz Exp $";
 #include <MEN/usr_err.h>
 #include <MEN/usr_utl.h>
 #include <MEN/mt_drv.h>
+
+static const char IdentString[]=MENT_XSTR(MAK_REVISION);
 
 /*--------------------------------------+
 |   DEFINES                             |
@@ -88,7 +87,7 @@ static void usage(void)
 	printf("                 1 = cyclic\n");
 	printf("    -n=<n>       exit after n-alarms     [endless]\n");
 	printf("\n");
-	printf("(c) 1998 by MEN mikro elektronik GmbH, %s\n\n",RCSid);
+	printf("Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH\n%s\n\n", IdentString);
 }
 
 /********************************* main *************************************

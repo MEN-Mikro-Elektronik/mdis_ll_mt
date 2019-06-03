@@ -5,8 +5,6 @@
  ****************************************************************************
  *  
  *       Author: see
- *        $Date: 2009/10/07 10:52:42 $
- *    $Revision: 1.3 $
  *
  *  Description: Simple example program for the MT driver 
  *                      
@@ -33,7 +31,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-static const char RCSid[]="$Id: mt_simp.c,v 1.3 2009/10/07 10:52:42 CKauntz Exp $";
 
 #include <stdio.h>
 #include <string.h>

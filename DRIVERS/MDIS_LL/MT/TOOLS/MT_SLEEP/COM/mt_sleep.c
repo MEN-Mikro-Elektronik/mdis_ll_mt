@@ -5,8 +5,6 @@
  ****************************************************************************
  *
  *       Author: see
- *        $Date: 2009/10/07 10:53:18 $
- *    $Revision: 1.6 $
  *
  *  Description: Sleep in MDIS call and calculate elapsed time
  *
@@ -37,7 +35,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-static const char RCSid[]="$Id: mt_sleep.c,v 1.6 2009/10/07 10:53:18 CKauntz Exp $";
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -47,6 +44,8 @@ static const char RCSid[]="$Id: mt_sleep.c,v 1.6 2009/10/07 10:53:18 CKauntz Exp
 #include <MEN/usr_utl.h>
 #include <MEN/mdis_api.h>
 #include <MEN/mt_drv.h>
+
+static const char IdentString[]=MENT_XSTR(MAK_REVISION);
 
 /*--------------------------------------+
 |   DEFINES                             |
@@ -103,7 +102,7 @@ static void usage(void)
 	printf("    -l           loop mode                       [off]\n");
 	printf("    -q           quiet mode (print only errors)  [off]\n");
 	printf("\n");
-	printf("(c) 1998 by MEN mikro elektronik GmbH, %s\n\n",REV);
+	printf("Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH\n%s\n\n", IdentString);
 }
 
 /********************************* main *************************************

@@ -3,8 +3,6 @@
  *         Name: mt_drv.h
  *
  *       Author: see
- *        $Date: 2010/12/01 12:20:21 $
- *    $Revision: 2.7 $
  *
  *  Description: Header file for MT driver
  *               - MT specific status codes
