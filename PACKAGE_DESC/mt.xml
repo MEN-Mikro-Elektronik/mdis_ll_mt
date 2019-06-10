@@ -2,8 +2,8 @@
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="packagedesc.xsd">
 	<name>mt</name>
 	<description>MDIS5 driver package for MDIS Test driver MT</description>
-	<date>2010-12-01</date>
-	<revision>2.12</revision>
+	<date>2019-06-07</date>
+	<revision>fb020da</revision>
 	<modellist>
 		<model>
 			<hwname>MT</hwname>
