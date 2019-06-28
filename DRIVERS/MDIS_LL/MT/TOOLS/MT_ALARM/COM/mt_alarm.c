@@ -32,6 +32,7 @@
  */
  
 
+#include <stdlib.h>
 #include <stdio.h>
 
 #include <MEN/men_typs.h>
