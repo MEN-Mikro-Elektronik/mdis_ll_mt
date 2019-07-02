@@ -34,6 +34,7 @@
  */
  
 
+#include <stdlib.h>
 #include <stdio.h>
 
 #include <MEN/men_typs.h>
@@ -134,7 +135,6 @@
 
 # include <taskLib.h>
 
-static const char IdentString[]=MENT_XSTR(MAK_REVISION);
 # undef  TASKLOCK
 # undef  TASKUNLOCK
 # define TASKLOCK	(taskLock())
@@ -146,6 +146,12 @@ static const char IdentString[]=MENT_XSTR(MAK_REVISION);
 # define CALLS     100000 /* number of function callcnt */
 # define OPENS     28     /* number of opened paths */
 #endif
+
+#ifdef LINUX
+# define MAX_OPENS 1000  /* max number of opened paths */
+# define CALLS     10000 /* number of function callcnt */
+# define OPENS     10    /* number of opened paths */
+#endif // LINUX
 
 
 #ifndef HRES_VAR
@@ -178,6 +184,7 @@ static const char IdentString[]=MENT_XSTR(MAK_REVISION);
 /*--------------------------------------+
 |   GLOBALS                             |
 +--------------------------------------*/
+static const char IdentString[]=MENT_XSTR(MAK_REVISION);
 
 /*--------------------------------------+
 |   PROTOTYPES                          |
