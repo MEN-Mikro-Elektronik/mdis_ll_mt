@@ -141,5 +141,13 @@
 			<notos>Linux</notos>
 			<notos>Windows</notos>
 		</swmodule>
+		<swmodule internal="true">
+			<name>mt_shmem</name>
+			<description>MDIS shared memory test tool</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>MT/TOOLS/MT_SHMEM/COM/program.mak</makefilepath>
+			<notos>Linux</notos>
+			<notos>Windows</notos>
+		</swmodule>
 	</swmodulelist>
 </package>
