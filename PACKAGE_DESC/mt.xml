@@ -149,5 +149,12 @@
 			<notos>Linux</notos>
 			<notos>Windows</notos>
 		</swmodule>
+		<swmodule internal="true">
+			<name>mt_semtest</name>
+			<description>OSS_SemXxx functions test tool</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>MT/TOOLS/MT_SEMTEST/COM/program.mak</makefilepath>
+			<notos>Windows</notos>
+		</swmodule>
 	</swmodulelist>
 </package>
