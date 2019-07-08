@@ -72,6 +72,10 @@ Start mt_spinltest tool to test the spin lock functions of the OSS library:
 ```mt_spinltest mt_nohw_1 -d=1```
 Wait about 5 minutes then press any key to end the test.
 
+#### Semaphore testing with mt_nohw driver
+Start mt_semtest tool to test the semaphore functions of the OSS library:
+```mt_semstest mt_nohw_1```
+
 #### Interrupt testing with M99 driver/M-Module
 
 Use mt_irqmax tool to get the maximum interrupt frequency:
