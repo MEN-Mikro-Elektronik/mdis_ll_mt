@@ -160,7 +160,7 @@ int main( int argc, char **argv )
 		alm.nr = n;
 		alm.msec = msec[n];
 		alm.cyclic = cyclic;
-		alm.signal = UOS_SIG_USR1+n;
+		alm.signal = (n == 0) ? UOS_SIG_USR1 : UOS_SIG_USR2;
 
 		if (alm.msec) {
 			timeout = (alm.msec > timeout ? alm.msec : timeout);
@@ -204,8 +204,8 @@ int main( int argc, char **argv )
 		}
 
 		switch(signal) {
-			case UOS_SIG_USR1+0: info = "ALARM 0";	alarmcnt++;		break;
-			case UOS_SIG_USR1+1: info = "ALARM 1";	alarmcnt++;		break;
+			case UOS_SIG_USR1: info = "ALARM 0";	alarmcnt++;		break;
+			case UOS_SIG_USR2: info = "ALARM 1";	alarmcnt++;		break;
 			default:			 info = "(unknown)";
 		}
 
