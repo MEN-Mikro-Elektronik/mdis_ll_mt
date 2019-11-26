@@ -27,7 +27,7 @@
  *
  *
  *---------------------------------------------------------------------------
- * Copyright (c) 2010-2019, MEN Mikro Elektronik GmbH
+ * Copyright 2010-2019, MEN Mikro Elektronik GmbH
  ****************************************************************************/
 
  /*
@@ -112,7 +112,7 @@ static void usage(void)
 #endif /* WINNT */
 	printf("    -v           verbose                                [off]\n");
 	printf("\n");
-	printf("Copyright (c) 2010-2019, MEN Mikro Elektronik GmbH\n%s\n\n", IdentString);
+	printf("Copyright 2010-2019, MEN Mikro Elektronik GmbH\n%s\n\n", IdentString);
 }
 
 /********************************* main *************************************

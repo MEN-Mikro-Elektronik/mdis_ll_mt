@@ -17,7 +17,7 @@
  *
  *
  *---------------------------------------------------------------------------
- * Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH
+ * Copyright 1998-2019, MEN Mikro Elektronik GmbH
  ****************************************************************************/
 
  /*
@@ -92,7 +92,7 @@ static void usage(void)
 	printf("    -r=<n>       nr of random tests    [10]\n");
 	printf("    -v           verbose               [off]\n");
 	printf("\n");
-	printf("Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH\n%s\n\n", IdentString);
+	printf("Copyright 1998-2019, MEN Mikro Elektronik GmbH\n%s\n\n", IdentString);
 }
 
 /********************************* main *************************************

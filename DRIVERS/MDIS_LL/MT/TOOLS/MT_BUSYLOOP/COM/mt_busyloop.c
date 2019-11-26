@@ -15,7 +15,7 @@
  *
  *
  *---------------------------------------------------------------------------
- * Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH
+ * Copyright 1998-2019, MEN Mikro Elektronik GmbH
  ****************************************************************************/
 
  /*
@@ -85,7 +85,7 @@ static void usage(void)
 	printf("    device       device name (MT)      [none]\n");
 	printf("    -n=<n>       nr of busy loops      [%d]\n",LOOPS);
 	printf("\n");
-	printf("Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH\n%s\n\n",IdentString);
+	printf("Copyright 1998-2019, MEN Mikro Elektronik GmbH\n%s\n\n",IdentString);
 }
 
 /********************************* main *************************************

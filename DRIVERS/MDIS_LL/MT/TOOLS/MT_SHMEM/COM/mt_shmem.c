@@ -23,7 +23,7 @@
  *
  *
  *---------------------------------------------------------------------------
- * Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH
+ * Copyright 1998-2019, MEN Mikro Elektronik GmbH
  ****************************************************************************/
 
  /*
@@ -99,7 +99,7 @@ static void usage(void)
 	printf("    -n=<n>       exit after n-accesses               [endless]\n");
 	printf("    -q           quiet mode                          [OFF]\n");
 	printf("\n");
-	printf("Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH\n%s\n\n",IdentString);
+	printf("Copyright 1998-2019, MEN Mikro Elektronik GmbH\n%s\n\n",IdentString);
 }
 
 /********************************* main *************************************

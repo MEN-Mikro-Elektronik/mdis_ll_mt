@@ -18,7 +18,7 @@
  *
  *
  *---------------------------------------------------------------------------
- * Copyright (c) 2010-2019, MEN Mikro Elektronik GmbH
+ * Copyright 2010-2019, MEN Mikro Elektronik GmbH
  ****************************************************************************/
 
  /*
@@ -79,7 +79,7 @@ static void usage(void)
 	printf("    -d=<ms>      ms [ms] between M_getstat calls        [11]\n");
 	printf("    -v           verbose                                [off]\n");
 	printf("\n");
-	printf("Copyright (c) 2010-2019, MEN Mikro Elektronik GmbH\n%s\n\n", IdentString);
+	printf("Copyright 2010-2019, MEN Mikro Elektronik GmbH\n%s\n\n", IdentString);
 }
 
 /********************************* main *************************************

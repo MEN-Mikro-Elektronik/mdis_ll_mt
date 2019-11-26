@@ -13,7 +13,7 @@
  *
  *
  *---------------------------------------------------------------------------
- * Copyright (c) 1996-2019, MEN Mikro Elektronik GmbH
+ * Copyright 1996-2019, MEN Mikro Elektronik GmbH
  ****************************************************************************/
 
  /*
@@ -81,7 +81,7 @@ static void usage(void)
 	printf("    device     devicename (M99)        [none]\n");
     printf("    -d=<diff>  max deviation (%%)       [10]\n");
 	printf("\n");
-	printf("Copyright (c) 1996-2019, MEN Mikro Elektronik GmbH\n%s\n\n",IdentString);
+	printf("Copyright 1996-2019, MEN Mikro Elektronik GmbH\n%s\n\n",IdentString);
 }
 
 /********************************* main *************************************
